@@ -2,7 +2,7 @@
   "id": "clock.timer",
   "name": "时间展示工具",
   "version": "1.0.0",
-  "author": "LessonPlugin",
+  "author": "OrbiBoard",
   "icon": "ri-time-line",
   "description": "提供时钟、秒表、倒计时等时间展示功能。",
   "actions": [
