@@ -14,7 +14,7 @@ const state = {
 function createWindow(initMode) {
   try {
     if (win && !win.isDestroyed()) {
-      try { win.focus(); } catch {}
+      try { win.focus(); } catch (e) {}
       return win;
     }
     const d = screen.getPrimaryDisplay();
@@ -36,12 +36,12 @@ function createWindow(initMode) {
     const file = path.join(__dirname, 'index.html');
     const href = url.pathToFileURL(file).href + `?mode=${encodeURIComponent(initMode || state.mode)}`;
     win.loadURL(href);
-    try { win.setAlwaysOnTop(true); } catch {}
-    try { win.setAlwaysOnTop(true, 'screen-saver'); } catch {}
+    try { win.setAlwaysOnTop(true); } catch (e) {}
+    try { win.setAlwaysOnTop(true, 'screen-saver'); } catch (e) {}
     win.on('closed', () => { win = null; });
     win.show();
     return win;
-  } catch { return null; }
+  } catch (e) { return null; }
 }
 
 const functions = {
@@ -67,10 +67,10 @@ const functions = {
       if (ny + size.height > sb.y + sb.height) ny = sb.y + sb.height - size.height;
       win.setBounds({ x: nx, y: ny, width: size.width, height: size.height });
       return true;
-    } catch { return false; }
+    } catch (e) { return false; }
   },
   toggleFullscreen: async () => {
-    try { if (!win || win.isDestroyed()) return false; win.setFullScreen(!win.isFullScreen()); return true; } catch { return false; }
+    try { if (!win || win.isDestroyed()) return false; win.setFullScreen(!win.isFullScreen()); return true; } catch (e) { return false; }
   }
 };
 

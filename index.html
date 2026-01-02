@@ -264,11 +264,11 @@
         try {
           const cfgTz = await window.clockAPI?.configGet('system', 'timeZone');
           if (typeof cfgTz === 'string' && cfgTz) tz = cfgTz;
-        } catch {}
+        } catch (e) {}
         try {
           const t = await window.clockAPI?.getCurrentTime();
           if (t && typeof t.nowMs === 'number') { baseNowMs = t.nowMs; baseJsNow = Date.now(); }
-        } catch {}
+        } catch (e) {}
       };
       const tick = () => {
         const nowMs = baseNowMs + (Date.now() - baseJsNow);
@@ -281,8 +281,8 @@
             cdRunning = false;
             try {
               const times = 3; const interval = 2000;
-              for (let i = 0; i < times; i++) { setTimeout(() => { try { window.clockAPI?.pluginCall('notify.plugin','sound',['alarm']); } catch {} }, i * interval); }
-            } catch {}
+              for (let i = 0; i < times; i++) { setTimeout(() => { try { window.clockAPI?.pluginCall('notify.plugin','sound',['alarm']); } catch (e) {} }, i * interval); }
+            } catch (e) {}
             cdEditorVisible = true;
             el('cd-editor').classList.remove('hidden');
             el('countdown-time').classList.add('hidden');
@@ -317,7 +317,7 @@
             }
             prevFullscreen = isFullscreen;
           }
-        } catch {}
+        } catch (e) {}
       }, 500);
     </script>
   </body>
