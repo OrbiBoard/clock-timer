@@ -34,7 +34,7 @@ function createWindow(initMode) {
       webPreferences: { preload: path.join(__dirname, 'preload.js'), nodeIntegration: false, contextIsolation: true }
     });
     const file = path.join(__dirname, 'index.html');
-    const href = url.pathToFileURL(file).href + `?mode=${encodeURIComponent(initMode || state.mode)}`;
+    const href = url.pathToFileURL(file).href + `?mode=${encodeURIComponent(initMode || state.mode)}&caller=${encodeURIComponent('clock-timer')}`;
     win.loadURL(href);
     try { win.setAlwaysOnTop(true); } catch (e) {}
     try { win.setAlwaysOnTop(true, 'screen-saver'); } catch (e) {}
